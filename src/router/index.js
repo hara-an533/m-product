@@ -4,16 +4,15 @@ import Login from '../views/Login.vue'
 
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
   {
     path: '/',
     name: 'Login',
-    component: Login
+    redirect: Login
   },
   {
-    path: '/register',
-    name: 'Register',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Register.vue')
+    path: '/login',
+    component: Login
   },
   {
     path: '/detail',
@@ -24,6 +23,21 @@ Vue.use(VueRouter)
 
 const router = new VueRouter({
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  //to 到哪里去
+  //from 从哪里来
+  //next 放行 
+  // let isLogin=window.sessionStorage.getItem('token');
+  // if(isLogin==nul){
+  //   router.push({path:'/login'})
+  // }
+  if (to.path === '/login') return next()
+  let token = window.sessionStorage.getItem('token');
+  console.log(token)
+  if (!token) return next('/login')
+  next(error)
 })
 
 export default router

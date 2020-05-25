@@ -61,8 +61,15 @@ export default {
       this.$refs.loginForm.validate(async valid => {
         if (!valid) return;
         console.log(this.loginForm);
-        const res = await this.$http.post("api/login", this.loginForm);
-        console.log(res);
+        const {data:res} = await this.$http.post("api/login", this.loginForm);
+        if(res.status==200){
+          this.$message.success('登录成功');
+          console.log(res.tk);
+          window.sessionStorage.setItem('token',res.tk);
+          this.$router.push('/detail')
+        }else {
+          this.$message.error('登录失败');
+        }
       });
       // this.axios
       //   .post("api/login", this.loginForm)
