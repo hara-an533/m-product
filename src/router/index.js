@@ -8,7 +8,7 @@ const routes = [
   {
     path: '/',
     name: 'Login',
-    redirect: Login
+    redirect: '/login'
   },
   {
     path: '/login',
@@ -37,7 +37,7 @@ router.beforeEach((to, from, next) => {
   let token = window.sessionStorage.getItem('token');
   console.log(token)
   if (!token) return next('/login')
-  next(error)
+  next()
 })
 
 export default router

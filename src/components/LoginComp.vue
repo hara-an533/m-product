@@ -28,8 +28,8 @@ export default {
   data: function() {
     return {
       loginForm: {
-        id: "",
-        pwd: ""
+        id: "p0126663",
+        pwd: "123456"
       },
       rules: {
         id: [
